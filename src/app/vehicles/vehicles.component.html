@@ -1,0 +1,90 @@
+<div class="grid__wrapper">
+
+  <div class="sample__header">
+    <div class="switch-sample">
+      <h2 class="switch-sample__title" igxLabel>Vehicles Signals Details</h2>
+      <igx-switch [(ngModel)]="live" [disabled]="isFinished" title="Start/Stop the syncronization">
+        <span class="switch-sample__label">Live</span>
+      </igx-switch>
+    </div>
+
+    <input class="gridSample__filter" igxInput type="text" placeholder="Filter by customer" (input)="customerFilter($event.target.value)">
+    <input class="gridSample__filter" igxInput type="text" style="margin-left: 10px" placeholder="Filter by status" (input)="statusFilter($event.target.value)">
+    
+
+  </div>
+
+  <igx-grid #vehicleGrid [data]="localData" [paging]="true" [perPage]="10" [paginationTemplate]="pager" height="600" width="100%">
+  
+
+    <igx-column field="VehicleIdentifier" header="Vehicle" filterable="true" width="300">
+      <ng-template igxCell let-cell="cell">
+        <div class="cell__inner">
+          <!-- <igx-avatar [src]="cell.row.rowData.VehicleIcon" roundShape="true" size="small"> </igx-avatar> -->
+          <span >{{ cell.value }}</span>
+          <!-- <igx-badge *ngIf="live" [type]="getBadgeType(cell)" [icon]="getIconType(cell)"></igx-badge> -->
+          <span class="cup" *ngIf="cell.row.rowData.Status === 1">
+              <img src="assets/img/connected.png" alt="image">
+          </span>
+          <span class="cup" *ngIf="cell.row.rowData.Status === 0">
+              <img src="assets/img/disconnected.png" alt="image">
+          </span>
+
+        </div>
+
+      </ng-template>
+    </igx-column>
+
+    <igx-column field="RegisterNumber" header="Register Number" dataType="number">
+      <ng-template igxCell let-val>
+        <div class="cell__inner">
+          {{ val }}
+        </div>
+      </ng-template>
+    </igx-column>
+
+
+    <igx-column header="Status" headerClasses="myClass" width="110px" field="StatusName" sortable="true">
+      <ng-template igxCell let-cell="cell">
+        <div class="cell__inner">
+          <div>{{ cell.value }}</div>
+        </div>
+      </ng-template>
+    </igx-column>
+
+    <igx-column field="LastSignalTime" header="Last Signal Time" sortable="true">
+      <ng-template igxCell let-val>
+        <div class="cell__inner">
+          {{ val }}
+        </div>
+      </ng-template>
+    </igx-column>
+
+    <igx-column field="CustomerName" header="Customer" width="200">
+      <ng-template igxCell let-val>
+        <!-- <div class="cell__inner"> -->
+          {{ val }}
+        <!-- </div> -->
+      </ng-template>
+    </igx-column>
+  </igx-grid>
+
+  <ng-template #pager let-grid>
+    <div *ngIf="grid.paging && grid.totalPages > 0" class="igx-paginator">
+      <button [disabled]="grid.isFirstPage" (click)="grid.paginate(0)" igxButton="icon" igxRipple igxRippleCentered="true">
+        <igx-icon fontSet="material" name="first_page"></igx-icon>
+      </button>
+      <button [disabled]="grid.isFirstPage" (click)="grid.previousPage()" igxButton="icon" igxRipple igxRippleCentered="true">
+        <igx-icon fontSet="material" name="chevron_left"></igx-icon>
+      </button>
+      <span>{{ grid.page + 1 }} of {{ grid.totalPages }}</span>
+      <button [disabled]="grid.isLastPage" (click)="grid.nextPage()" igxRipple igxRippleCentered="true" igxButton="icon">
+        <igx-icon fontSet="material" name="chevron_right"></igx-icon>
+      </button>
+      <button [disabled]="grid.isLastPage" (click)="grid.paginate(grid.totalPages - 1)" igxButton="icon" igxRipple igxRippleCentered="true">
+        <igx-icon fontSet="material" name="last_page"></igx-icon>
+      </button>
+    </div>
+  </ng-template>
+
+</div>
