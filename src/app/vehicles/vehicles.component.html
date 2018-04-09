@@ -17,16 +17,16 @@
   <igx-grid #vehicleGrid [data]="localData" [paging]="true" [perPage]="10" [paginationTemplate]="pager" height="600" width="100%">
   
 
-    <igx-column field="VehicleIdentifier" header="Vehicle" filterable="true" width="300">
+    <igx-column field="vehicleIdentifier" header="Vehicle" filterable="true" width="300">
       <ng-template igxCell let-cell="cell">
         <div class="cell__inner">
           <!-- <igx-avatar [src]="cell.row.rowData.VehicleIcon" roundShape="true" size="small"> </igx-avatar> -->
           <span >{{ cell.value }}</span>
           <!-- <igx-badge *ngIf="live" [type]="getBadgeType(cell)" [icon]="getIconType(cell)"></igx-badge> -->
-          <span class="cup" *ngIf="cell.row.rowData.Status === 1">
+          <span class="cup" *ngIf="cell.row.rowData.statusId === 1">
               <img src="assets/img/connected.png" alt="image">
           </span>
-          <span class="cup" *ngIf="cell.row.rowData.Status === 0">
+          <span class="cup" *ngIf="cell.row.rowData.statusId === 0">
               <img src="assets/img/disconnected.png" alt="image">
           </span>
 
@@ -35,7 +35,7 @@
       </ng-template>
     </igx-column>
 
-    <igx-column field="RegisterNumber" header="Register Number" dataType="number">
+    <igx-column field="registerNumber" header="Register Number" dataType="number">
       <ng-template igxCell let-val>
         <div class="cell__inner">
           {{ val }}
@@ -44,7 +44,7 @@
     </igx-column>
 
 
-    <igx-column header="Status" headerClasses="myClass" width="110px" field="StatusName" sortable="true">
+    <igx-column header="Status" headerClasses="myClass" width="110px" field="statusName" sortable="true">
       <ng-template igxCell let-cell="cell">
         <div class="cell__inner">
           <div>{{ cell.value }}</div>
@@ -52,7 +52,7 @@
       </ng-template>
     </igx-column>
 
-    <igx-column field="LastSignalTime" header="Last Signal Time" sortable="true">
+    <igx-column field="lastSignalTime" header="Last Signal Time" sortable="true">
       <ng-template igxCell let-val>
         <div class="cell__inner">
           {{ val }}
@@ -60,7 +60,7 @@
       </ng-template>
     </igx-column>
 
-    <igx-column field="CustomerName" header="Customer" width="200">
+    <igx-column field="customerName" header="Customer" width="200">
       <ng-template igxCell let-val>
         <!-- <div class="cell__inner"> -->
           {{ val }}
