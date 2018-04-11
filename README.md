@@ -28,7 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Prerequisites :
 - Angular CLI v 1.7.3
--Nodev 8.9.3
+- Nodev 8.9.3
 
 # Get Start
 - Please run the command npm start .
